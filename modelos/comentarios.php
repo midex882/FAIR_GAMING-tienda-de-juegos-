@@ -106,6 +106,18 @@
             $con->close();
 
         }
+
+        public function print_comentario($com)
+        {
+            echo"<article class=\"comentario-juego col-12 col-md-6 col-lg-4\">
+            <img src=\"$com[caratula]\" class=\"d-block imagen-comentario\" alt=\"...\">
+                <div>
+                    <h4 class=\"nick-usu-comentario\">$com[usuario]</h4>
+                    <p class\"contenido-comentario\">$com[comentario]</p>
+                    <p class=\"fecha-comentario\">$com[fech]</p>
+                </div>   
+            </article>";
+        }
     }
 
 
