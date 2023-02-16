@@ -16,8 +16,13 @@
 
     for($i = 0; $i < count($plataformas); $i++)
     {
-        require_once "modelos/juegos.php";
-        $cubo_plataformas_con_juegos[] = juego::get_n_juegos_plat($plataformas[$i], 4,"yes","no");
+        require_once "modelos/plataformas.php";
+        if(plataforma::tiene_juegos($plataformas[$i], "yes"))
+        {
+            require_once "modelos/juegos.php";
+            $cubo_plataformas_con_juegos[] = juego::get_n_juegos_plat($plataformas[$i], 4,"yes","no");
+        }
+
 
     }
     include "vistas/mostrar_juegos_plataforma.php";

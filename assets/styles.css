@@ -474,6 +474,18 @@ textarea{
   width: 50%;
 }
 
+/* USUARIOS */
+
+.usuario{
+  background-color: rgb(59, 59, 59);
+  border: 1px solid rgb(36, 36, 36) ;
+  margin: 0.5rem;
+  padding: 0.75rem;
+  color: white;
+}
+.usuario span{
+  font-size: 1.2em;
+}
 
   /*ALERTA*/
 

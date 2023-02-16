@@ -10,6 +10,6 @@
         $consulta->close();
         $con->close();
 
-        header("refresh:0; url=http://localhost/videojuegos/controladores/detalles_plataforma.php?nombre=Steam&id=2&details=");
+        header("refresh:0; url=http://localhost/videojuegos/controladores/detalles_plataforma.php?nombre=$_GET[nombre]&id=$_GET[id]&details=");
     }
 ?>

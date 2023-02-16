@@ -13,6 +13,61 @@
             $this->activo = false;
         }
 
+        public function nueva_plataforma($nombre,$activo,$logo)
+        {
+            require_once "../bd/bd.php";
+            $con = conectar::conexion();
+    
+            $se = "insert into plataformas values(null,?,?,?)";
+            $consulta = $con->prepare($se);
+            $consulta->bind_param("sis",$nombre,$activo,$logo);
+            $consulta->execute();
+            $consulta->close();
+            $con->close();
+        }
+
+        public function modificar_plataforma($id,$nombre,$activo,$logo)
+        {
+            require_once "../bd/bd.php";
+            $con = conectar::conexion();
+    
+            $se = "update plataformas set nombre = ?, activo = ?, logo = ? where id = ?";
+            $consulta = $con->prepare($se);
+            $consulta->bind_param("sisi",$nombre,$activo,$logo,$id);
+            $consulta->execute();
+            $consulta->close();
+            $con->close();
+        }
+
+        public static function tiene_juegos($plataforma, $index)
+        {
+            if($index == "yes")
+            {
+                require_once "bd/bd.php";
+            }else{
+                require_once "../bd/bd.php";
+            }
+
+
+            $con = conectar::conexion();
+
+            $se = "SELECT count(*) from juegos where plataforma = (SELECT id from plataformas where nombre = '$plataforma')";
+            $consulta = $con->prepare($se);
+            $consulta->bind_result($numero);
+            $consulta->execute();
+            $consulta->fetch();
+            $consulta->close();
+            $con->close();
+
+            if($numero > 0)
+            {
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
         public static function imprimir_plats($admin)
         {
             require_once "../bd/bd.php";

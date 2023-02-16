@@ -41,9 +41,14 @@
         $admin = "yes";
     }
     for($i = 0; $i < count($plataformas); $i++)
-    {
-        require_once "../modelos/juegos.php";
-        $cubo_plataformas_con_juegos[] = juego::get_n_juegos_plat($plataformas[$i],-1,"no", $admin);
+    {   
+        require_once "../modelos/plataformas.php";
+        if(plataforma::tiene_juegos($plataformas[$i],"no"))
+        {
+            require_once "../modelos/juegos.php";
+            $cubo_plataformas_con_juegos[] = juego::get_n_juegos_plat($plataformas[$i],-1,"no", $admin);
+        }
+
 
     }
     include "../vistas/mostrar_seccion_juegos.php";

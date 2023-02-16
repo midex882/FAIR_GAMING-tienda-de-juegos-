@@ -26,6 +26,7 @@
                         echo"<div class=\"d-flex flex-wrap\">";
                         echo"<form action=\"../controladores/activacion_plat.php\" method=\"get\" class=\"d-flex me-2\">";
                             echo"<input type=\"hidden\" name=\"id\" value=\"$id\">";
+                            echo"<input type=\"hidden\" name=\"nombre\" value=\"$nombre\">";
                             if($activo == 1)
                             {
                                 echo"<button type=\"submit\" name=\"activacion\" class=\"activo noabsolute\" value=\"0\">Plataforma activa. Pulsa para desactivar</button>";
@@ -35,8 +36,8 @@
                             
                         echo"</form>";
 
-                        echo"<form action=\"../controladores/modificar_plataforma.php\" method=\"post\">";
-                            echo"<button type=\"submit\" name=\"modificar\" class=\"activar\" value=\"$id\">Modificar</button>";
+                        echo"<form action=\"../controladores/modificar_plataforma.php\" method=\"get\">";
+                            echo"<button type=\"submit\" name=\"ir_a_modificar\" class=\"activar\" value=\"$id\">Modificar</button>";
                     echo"</form>";
                     echo"</div>";
                     }

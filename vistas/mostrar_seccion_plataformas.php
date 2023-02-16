@@ -52,6 +52,11 @@
                     }
                 echo"</div>";
             echo"</section>";
+        }else if(isset($resultados) and sizeof($resultados) == 0)
+        {
+            echo"<section class=\"section-container container-xl\">";
+                echo"<h3 class=\"no_results\">Lo sentimos, pero no se han obtenido resultados</h3>";
+            echo"</section>";
         }
     ?>
         <section class="section-container container-xl">
