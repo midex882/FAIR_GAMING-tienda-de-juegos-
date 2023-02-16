@@ -19,7 +19,43 @@
         check_header();
     ?>
     <main>
-        <section class="lista-usuarios d-flex flex-column container-xl">
+        <?php
+            echo"<section class=\"admin\">
+                    <form method=\"get\" action=\"../controladores/seccion_usuarios.php\">
+                        <input class=\"barra-busqueda\" type=\"text\" name=\"palabras\">
+                        <button type=\"submit\" class=\"intro\"name=\"buscar\">Buscar</button>
+                    </form>
+                    <form method=\"get\" action=\"../controladores/anadir_usuario.php\">
+                        <button type=\"submit\" class=\"activar\" name=\"insertar\">Insertar nuevo usuario</button>
+                    </form>
+                </section>";
+            if(isset($resultados))
+            {
+                if(sizeof($resultados) > 0)
+                {   
+                    
+                    echo'        <section class="lista-usuarios d-flex flex-column container-xl mt-4">
+                                <h2 class="section-title">Resultados de la búsqueda</h2>
+                                <div class="lista-usuarios d-flex flex-column">';
+    
+                            foreach($resultados as $resultado)
+                            {
+                                require_once "../modelos/usuarios.php";
+                                $usuario = new usuario();
+        
+                                $usuario->print_usuario($resultado); 
+                            }
+                        echo"</div>";
+                    echo"</section>";
+                }else{
+                    echo"<section class=\"section-container container-xl\">";
+                    echo"<h3 class=\"no_results\">Lo sentimos, pero no se han obtenido resultados</h3>";
+                    echo"</section>";
+                }
+            }
+        ?>
+        <section class="lista-usuarios d-flex flex-column container-xl mt-4">
+            <h2 class="section-title">Nuestros usuarios</h2>
             <div class="lista-usuarios d-flex flex-column">
                 <?php
                     foreach($matriz as $array)
@@ -27,9 +63,7 @@
                         require_once "../modelos/usuarios.php";
                         $usuario = new usuario();
 
-                        $usuario->print_usuario($array);
-
-                        
+                        $usuario->print_usuario($array); 
                     }
 
                 ?>

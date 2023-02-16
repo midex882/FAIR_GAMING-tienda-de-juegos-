@@ -242,7 +242,7 @@ main{
   border: 2px solid rgb(73, 73, 73);
   color: white;
   border-radius: 25px;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 .activo{
   position: absolute;
@@ -253,7 +253,7 @@ main{
   border: 2px solid rgb(73, 73, 73);
   color: white;
   border-radius: 25px;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .activo.noabsolute,.inactivo.noabsolute{
