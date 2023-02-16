@@ -28,11 +28,11 @@
             {
                 if($n > 0)
                 {
-                    $se = "SELECT j.nombre juego,j.id jid, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
-                    where j.id = c.juego and u.id = c.usuario and j.activo = 1 order by c.fecha DESC limit $n";
+                    $se = "SELECT j.nombre juego, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
+                    where j.id = c.juego and u.id = c.usuario order by c.fecha DESC limit $n";
                 }else{
-                    $se = "SELECT j.nombre juego,j.id jid, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
-                    where j.id = c.juego and u.id = c.usuario and j.activo = 1 order by c.fecha DESC";
+                    $se = "SELECT j.nombre juego, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
+                    where j.id = c.juego and u.id = c.usuario order by c.fecha DESC";
                 }
 
                 $datos = $con->query($se);
@@ -40,21 +40,13 @@
                 $i = 0;
                 while($fila = $datos->fetch_array(MYSQLI_ASSOC))
                 {
-                    if($index == "yes")
-                    {
-                        require_once "PHP/funciones.php";
-                    }else{
-                        require_once "../PHP/funciones.php";
-                    }
-                    
+                    require_once "PHP/funciones.php";
                     $fech = fecha_bd_esp($fila["fech"]);
 
                     $coms[$i]["usuario"] = $fila["usuario"];
                     $coms[$i]["juego"] = $fila["juego"];
-                    $coms[$i]["jid"] = $fila["jid"];
                     $coms[$i]["comentario"] = $fila["comentario"];
                     $coms[$i]["fech"] = $fech;
-                    $coms[$i]["truedate"] = $fila["fech"];
                     $coms[$i]["caratula"] = $fila["caratula"];
                     $i++;
                 }
@@ -70,11 +62,11 @@
                 {
                     if($n > 0)
                     {
-                        $se = "SELECT j.nombre juego,j.id jid, j.caratula, u.nick usuario, c.comentario, c.fecha fech  from juegos j, usuarios u, comentarios c 
-                        where j.id = c.juego and u.id = c.usuario and j.id = $juego and j.activo = 1 order by c.fecha DESC limit $n";
+                        $se = "SELECT j.nombre juego, j.caratula, u.nick usuario, c.comentario, c.fecha fech  from juegos j, usuarios u, comentarios c 
+                        where j.id = c.juego and u.id = c.usuario and j.id = $juego order by c.fecha DESC limit $n";
                     }else{
-                        $se = "SELECT j.nombre juego,j.id jid, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
-                        where j.id = c.juego and u.id = c.usuario and j.id = $juego and j.activo = 1 order by c.fecha DESC";
+                        $se = "SELECT j.nombre juego, j.caratula, u.nick usuario, c.comentario, c.fecha fech from juegos j, usuarios u, comentarios c 
+                        where j.id = c.juego and u.id = c.usuario and j.id = $juego order by c.fecha DESC";
                     }
 
                     $datos = $con->query($se);
@@ -87,10 +79,8 @@
 
                         $coms[$i]["usuario"] = $fila["usuario"];
                         $coms[$i]["juego"] = $fila["juego"];
-                        $coms[$i]["jid"] = $fila["jid"];
                         $coms[$i]["comentario"] = $fila["comentario"];
                         $coms[$i]["fech"] = $fech;
-                        $coms[$i]["truedate"] = $fila["fech"];
                         $coms[$i]["caratula"] = $fila["caratula"];
                         $i++;
                     }
@@ -114,24 +104,18 @@
             $consulta->execute();
             $consulta->close();
             $con->close();
+
         }
-
-
 
         public function print_comentario($com)
         {
-            echo"<article class=\"com col col-12 col-md-4 col-lg-3\">
-            <img src=\"$com[caratula]\" class=\"d-block w-100 imagen-comentario img-top\" alt=\"...\">
+            echo"<article class=\"comentario-juego col-12 col-md-6 col-lg-4\">
+            <img src=\"$com[caratula]\" class=\"d-block imagen-comentario\" alt=\"...\">
                 <div>
                     <h4 class=\"nick-usu-comentario\">$com[usuario]</h4>
                     <p class\"contenido-comentario\">$com[comentario]</p>
                     <p class=\"fecha-comentario\">$com[fech]</p>
-                </div>
-                <form method=\"post\" action=\"../controladores/seccion_comentarios.php\">
-                    <input type=\"hidden\" name=\"juego\" value=\"$com[jid]\"/>
-                    <input type=\"hidden\" name=\"usuario\" value=\"$com[usuario]\"/>
-                    <button class=\"borrar\" type=\"submit\" name=\"delete\" value=\"$com[truedate]\">Eliminar</button>
-                </form>   
+                </div>   
             </article>";
         }
     }
